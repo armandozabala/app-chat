@@ -51,7 +51,7 @@ const ChatProvider = (props) => {
     }
 
     const cargarMensaje = () => {
-          db.collection('chat')
+          db.collection('chat').orderBy('fecha')
              .onSnapshot(query => {
                   const arrayMensaje = query.docs.map(item => item.data());
                   setMensaje(arrayMensaje)
@@ -61,7 +61,7 @@ const ChatProvider = (props) => {
     const agregarMensajes = async (uidChat, textoInput) => {
 
         try{
-            await db.collection('char').add({
+            await db.collection('chat').add({
                  fecha: Date.now(),
                  texto: textoInput,
                  uid: uidChat
